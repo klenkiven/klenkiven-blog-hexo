@@ -16,12 +16,12 @@ categories: [Linux]
 5. 如果文章有啥问题，欢迎大佬指正！我也是个小菜鸡，斗胆放出教程。
 6. 如果有志同道合的朋友有问题，可以在文章下方评论！PS.建议先看**官方文档**和**百度**尝试解决，如果解决不了，可以评论一起讨论。
 ## 安装前的一些准备活动
-#### 1. 验证启动模式
+### 1. 验证启动模式
 ```bash
 ls /sys/firmware/efi/efi
 ```
 虚拟机这里是UEFI启动模式
-#### 2.连接到因特网
+### 2.连接到因特网
 由于是虚拟机，采用的是**有线连接**。
 
 ```bash
@@ -29,13 +29,13 @@ dhcpcd                #自动获取IP地址
 ping www.baidu.com    #测试网络是否连通
 ```
 
-#### 2.更新系统时间
+### 2.更新系统时间
 使用命令 `timedatectl` 确保时间正确
 
 ```bash
 timedatectl set-ntp true
 ```
-#### 3.建立硬盘分区
+### 3.建立硬盘分区
 1. 这里使用 `cfdisk` 命令进行分区操作，这个是一个图形化的分区界面傻瓜化，很好用。
 ![建立分区表](https://img-blog.csdnimg.cn/20191122235039402.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE4NDc4NjEz#pic_center,size_16,color_FFFFFF,t_70 ) 
 这里选择 gpt 分区表比较合适于 UEFI 启动方式，以下是**UEFI 的推荐分区方案：**
@@ -59,7 +59,7 @@ timedatectl set-ntp true
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20191123001514358.png#pic_center )
 7. 记一下每个分区叫啥、大小，以后有用，最后记得**保存**
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2019112300243628.png#pic_center )
-#### 4.格式化分区
+### 4.格式化分区
 1. 格式化**普通分区**
 	```bash
 	mkfs.fat -F32 /dev/sda1      #把sda1格式化为fat32并挂载到 /boot/efi
@@ -69,7 +69,7 @@ timedatectl set-ntp true
 	```bash
 	mkswap /dev/sda2         #这个是swap分区
 	```
-#### 5.挂载分区
+### 5.挂载分区
 ```bash
 mount /dev/sda3 /mnt
 mkdir -p /mnt/boot/efi
@@ -77,7 +77,7 @@ mount /dev/sda1 /mnt/boot/efi
 ```
 ## 正式开始安装
 开头的一切都是值得的，现在开始了正式的安装步骤，这里将会有大片等待时间，可以喝口水稍作休息。
-#### 1.选择镜像
+### 1.选择镜像
 文件 `/etc/pacman.d/mirrorlist` 定义了软件包会从哪个 **镜像源** 下载。这里使用VIM进行文件修改。
 对 VIM 有了解的可以按照下面步骤操作，不会的有简单方法。
 ```bash
@@ -99,7 +99,7 @@ nano /etc/pacman.d/mirrorlist
 这个是图形化界面，直接在顶行输入
 `Server = http://mirrors.cqu.edu.cn/archlinux/$repo/os/$arch`
 退出时 使用`Ctrl + X`退出。
-#### 2.安装必须的软件包
+### 2.安装必须的软件包
 ```bash
 pacstrap /mnt base base-devel linux linux-firmware
 ```
@@ -109,18 +109,18 @@ pacstrap /mnt base base-devel linux linux-firmware
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20191123011921830.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE4NDc4NjEz#pic_center,size_16,color_FFFFFF,t_70)
 ## 配置系统
 这一部分也是很繁琐的一些配置步骤，不过如果能理解这些，对linux的理解会有一些提高的。
-#### 1.Fstab
+### 1.Fstab
 用以下命令生成`fstab`文件
 ```bash
 genfstab -U /mnt >> /mnt/etc/fstab   #生成fstab文件
 cat /mnt/etc/fstab                   #检验是否正确生成fstab文件
 ```
-#### 2.Chroot
+### 2.Chroot
 这一步进入新安装的系统进行进一步的配置
 ```bash
 arch-chroot /mnt
 ```
-#### 3.时区
+### 3.时区
 将时间设置为**Shanghai时间**
 ```bash
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -129,7 +129,7 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ```bash
 hwclock --systohc
 ```
-#### 4.本地化
+### 4.本地化
 
 > 本地化的程序与库若要本地化文本，都依赖 **Locale**，后者明确规定地域、货币、时区日期的格式、字符排列方式和其他本地化标准等等。在下面两个文件设置：`locale.gen` 与 `locale.conf`。
 `/etc/locale.gen` 是一个仅包含注释文档的文本文件。指定您需要的本地化类型，只需**移除**对应行前面的注释符号（＃）即可，建议选择带 UTF-8 的项
@@ -162,7 +162,7 @@ locale-gen
 ```bash
 nano /etc/locale.conf   #输入 LANG=en_US.UTF-8 保存
 ```
-#### 5.网络
+### 5.网络
 创建`/etc/hostname`文件
 ```bash
 nano /etc/hostname    #输入 myhostname 保存
@@ -173,13 +173,13 @@ nano /etc/hosts
 >	::1		localhost
 >	127.0.1.1	myhostname.localdomain	myhostname
 
-#### 6.Root 密码
+### 6.Root 密码
 **设置 ROOT 密码**极其重要！密码千万不要忘记！！！
 ```bash
 passwd
 ```
 然后按照提示设置密码！
-#### 7.安装引导程序(UEFI这部分也比较麻烦)
+### 7.安装引导程序(UEFI这部分也比较麻烦)
 这里就显示出，前面的**分区工作**是极其重要的
 1. **要安装`grub`软件**：
 	```bash

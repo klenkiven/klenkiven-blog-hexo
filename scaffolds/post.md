@@ -1,6 +1,7 @@
 ---
 title: {{ title }}
 date: {{ date }}
-tags:
 sidebar: [toc]
+tags:
+categories:
 ---
