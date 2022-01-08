@@ -3,7 +3,7 @@ title: Java笔记---枚举类和注解
 sidebar:
   - toc
 date: 2020-02-28 14:14:09
-tags: [Java基础知识]
+tags: [Java]
 categories: [Java基础知识]
 ---
 

@@ -4,7 +4,7 @@ sidebar:
   - toc
 date: 2019-12-07 10:46:00
 tags: [Java]
-categories: [Java基础]
+categories: [Java基础知识]
 ---
 
 ## this关键字

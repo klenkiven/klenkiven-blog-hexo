@@ -4,7 +4,7 @@ sidebar:
   - toc
 date: 2020-04-17 17:26:40
 tags: [Java]
-categories: [Java基础]
+categories: [Java基础知识]
 ---
 
 ## Java笔记--网络编程

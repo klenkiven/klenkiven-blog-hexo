@@ -5,6 +5,7 @@ sidebar:
 date: 2021-12-31 15:38:00
 tags: [Java, JVM]
 categories: [Java虚拟机]
+cover: https://klenkiven-blog-image.oss-cn-zhangjiakou.aliyuncs.com/img/JVM-内存结构.jpg
 ---
 
 ## 什么是Java虚拟机？

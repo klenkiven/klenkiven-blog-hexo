@@ -4,7 +4,7 @@ sidebar:
   - toc
 date: 2020-03-13 13:46:00
 tags: [Java]
-categories: [Java基础]
+categories: [Java基础知识]
 ---
 
 ## Java笔记--反射

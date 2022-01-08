@@ -3,6 +3,7 @@ title: 首篇Hexo博客
 date: 2022-01-08 20:20:29
 tags: [测试]
 categories: [Hexo测试]
+cover: https://klenkiven-blog-image.oss-cn-zhangjiakou.aliyuncs.com/img/HEXO-LOGO.jpg
 ---
 
 这是首篇博客的摘要，里面包含了许多测试代码，可以方便编写

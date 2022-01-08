@@ -4,7 +4,7 @@ sidebar:
   - toc
 date: 2019-12-17 13:16:00
 tags: [Java]
-categories: [Java基础]
+categories: [Java基础知识]
 ---
 
 ## 访问权限控制

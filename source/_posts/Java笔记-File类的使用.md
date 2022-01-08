@@ -3,7 +3,7 @@ title: Java笔记---File类的使用
 sidebar:
   - toc
 date: 2020-02-29 18:29:10
-tags: [Java基础知识]
+tags: [Java]
 categories: [Java基础知识]
 ---
 

@@ -3,7 +3,7 @@ title: Java笔记---成员初始化
 sidebar:
   - toc
 date: 2019-12-29 19:41:58
-tags: [Java基础知识]
+tags: [Java]
 categories: [Java基础知识]
 ---
 
