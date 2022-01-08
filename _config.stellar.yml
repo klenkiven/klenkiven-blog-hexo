@@ -1,0 +1,22 @@
+sidebar:
+  widgets:
+    default_layout: [welcome, recent]
+  menu:
+    post: '[博客](/)'
+    notes: '[便签](/notes/)'
+    # post: '[关于](/blog/)'
+footer:
+  sitemap:
+    '博客主页':
+      - '[主页](/)'
+    '博客':
+      - '[近期发布](/blog/)'
+      - '[分类](/categories/)'
+      - '[标签](/tags/)'
+      - '[归档](/archives/)'
+    'Wiki':
+#      - '[所有项目](/wiki/)'
+      - '[便签](/notes/)'
+    '联系我们':
+      - '[Email](mailto:wzl709@outlook.com)'
+      - '[GitHub](https://gitee.com/klenkiven)'
