@@ -1,0 +1,20 @@
+JavaConcurrency:
+  title: Java并发编程
+  subtitle: '线程安全/提高效率 | Writed by KlenKiven'
+  tags: [Java专题, 笔记]
+  logo: 
+    src: https://klenkiven-blog-image.oss-cn-zhangjiakou.aliyuncs.com/img/java-concurrency-logo.jpeg
+    small: 108px
+    large: 180px
+  description: Java 并发是一个涵盖 Java 平台上的多线程、并发和并行性的术语。  这包括 Java 并发工具、问题和解决方案。  本 Java 并发教程涵盖了与 Java 中的多线程相关的多线程、并发构造、并发问题、成本和收益的核心概念。
+
+Notes:
+  title: 便笺
+  index: false
+  sidebar: [toc]
+  tags: 笔记
+  sections:
+    '资料整理': [101, 199]
+    '后端开发': [201, 299]
+    '系统运维': [301, 399]
+    '常用网站': [401, 499]

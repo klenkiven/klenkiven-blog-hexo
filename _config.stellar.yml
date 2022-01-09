@@ -3,8 +3,15 @@ sidebar:
     default_layout: [welcome, recent]
   menu:
     post: '[博客](/)'
+    wiki: '[专栏](/wiki/)'
     notes: '[便签](/notes/)'
-    # post: '[关于](/blog/)'
+    about: '[关于](/about/)'
+
+comments:
+  service: beaudar
+  beaudar:
+    repo: klenkiven/blog-comments
+
 footer:
   sitemap:
     '博客主页':
