@@ -2,8 +2,7 @@
 welcome:
   layout: markdown
   title: 欢迎，亲爱的旅行者
-  content:
-    - 这是KlenKiven的小世界，上面会经常更新一些KlenKiven的技术心得和日常生活吐槽
+  content: "这是KlenKiven的小世界，上面会经常更新一些KlenKiven的技术心得和日常生活吐槽"
 
 # Recent update
 recent:
