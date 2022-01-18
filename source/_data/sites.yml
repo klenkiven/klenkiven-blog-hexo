@@ -1,0 +1,18 @@
+tools:
+  title: 常用工具网站
+  description:
+  items:
+    - title: emojipedia
+      url: https://emojipedia.org/
+      screenshot: https://klenkiven-blog-image.oss-cn-zhangjiakou.aliyuncs.com/img/EmojiPedia-snapshot.png
+      avatar: https://emojipedia.org/static/img/logo/emojipedia-logo-140.0d779a8a903c.png
+      description: Emoji搜索，以及解释
+
+java:
+  title: Java学习资料
+  description: 
+  items:
+    - title: 'Java Concurrency and Multithreading Tutorial'
+      url: http://tutorials.jenkov.com/java-concurrency/index.html
+      screenshot: https://klenkiven-blog-image.oss-cn-zhangjiakou.aliyuncs.com/img/JavaConcurrency-snapshot.png
+      avatar: http://tutorials.jenkov.com/favicon.ico

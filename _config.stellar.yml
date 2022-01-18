@@ -13,6 +13,13 @@ comments:
     repo: klenkiven/blog-comments
 
 footer:
+  social:
+    github:
+      icon: '<img src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.3/social/08a41b181ce68.svg"/>'
+      url: https://github.com/klenkiven
+    comments:
+      icon: '<img src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.3/social/942ebbf1a4b91.svg"/>'
+      url: /about/#comments
   sitemap:
     '博客主页':
       - '[主页](/)'
