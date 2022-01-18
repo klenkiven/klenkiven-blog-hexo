@@ -2,11 +2,11 @@
 robots: 'index,nofollow'
 menu_id: notes
 layout: wiki
-wiki: Notes
+wiki: 便笺
 header: true
 comments: false
 breadcrumb: false
-toc_title: 便签
+toc_title: 便笺
 ---
 
 ## 计划

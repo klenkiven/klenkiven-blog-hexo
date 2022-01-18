@@ -4,7 +4,7 @@ sidebar:
   menu:
     post: '[博客](/)'
     wiki: '[专栏](/wiki/)'
-    notes: '[便签](/notes/)'
+    notes: '[便笺](/notes/)'
     about: '[关于](/about/)'
 
 comments:
@@ -22,8 +22,8 @@ footer:
       - '[标签](/tags/)'
       - '[归档](/archives/)'
     'Wiki':
-#      - '[所有项目](/wiki/)'
+      - '[所有专栏](/wiki/)'
       - '[便签](/notes/)'
     '联系我们':
       - '[Email](mailto:wzl709@outlook.com)'
-      - '[GitHub](https://gitee.com/klenkiven)'
+      - '[GitHub](https://github.com/klenkiven)'

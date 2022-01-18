@@ -1,6 +1,6 @@
 ---
 layout: wiki
-wiki: Notes
+wiki: 便笺
 order: 101
 title: Java
 ---
