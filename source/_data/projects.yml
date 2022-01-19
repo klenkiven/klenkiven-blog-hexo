@@ -16,6 +16,13 @@ Java核心技术卷:
     small: 108px
     large: 180px
   description: Java核心技术卷主要讨论Java语言特性以及Java核心类库的特性。话题广泛，主要包括：反射和代理、接口、泛型程序设计、集合、并发等等话题。适合有一定程序设计基础的Java程序员。
+  sidebar: [toc]
+  sections:
+    '面向对象编程': [101,199]
+    '异常处理': [201,299]
+    '泛型程序设计': [301,399]
+    '集合框架': [401,499]
+    '并发': [501, 599]
 深入理解Java虚拟机: 
   title: 深入理解Java虚拟机
   subtitle: 'JVM高级特性与最佳实践 | Written by KlenKiven'
