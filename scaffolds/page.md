@@ -1,4 +1,7 @@
 ---
-title: {{ title }}
-date: {{ date }}
+layout: wiki
+wiki: 
+seo_title: 
+order: 
+comments: false
 ---

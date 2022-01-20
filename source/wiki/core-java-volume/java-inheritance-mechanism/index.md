@@ -139,8 +139,147 @@ if (staff[1] instanceof Manager) {
 
 ## Object：所有子类的超类
 
-## 泛型数组列表
+Object是所有对象的超类，但是没有显式去声明`public class A extends Object`。由于Java中所有对象都是这个类派生的，所以这个类很重要。
 
-## 对象包装器与自动装箱
+Object类型的变量只能用于作为各种值的泛型容器。因为Java中存储的对象只是对象的一个引用，可以理解为一个指针。C++虽然没有所有类的根类，但是每个指针都可以转换成`void*`指针。
 
-## 参数数量可变的方法
+这个类大部分API都是用于并发编程使用，例如，`wait()`, `notify()`, `yield()`等等。但是还有很多API与平时的开发编程息息相关，包括，`equals()`, `toString()`, `hashCode()`方法。
+
+### `equals()`方法
+
+Object类中的equals方法用于检验一个对象是不是等于另一个对象。因此**默认行为**就是：如果两个对象引用相等，那么这两个对象就肯定相等。
+
+但是，大多数业务上检测对象的相等性都是基于状态检测对象的相等性，如果对象状态相等，那么对象就是相等的。因此，再定义子类的时候通常会重写`equals()`。
+
+{% noteblock ⚠️注意 %}
+为了防止对象内的成员变量为null，需要使用Objects工具类的`Objects.equals()`方法。
+```java 示范代码
+// 如果有一方为null，返回false
+return Objects.equals(this.name, other.name);
+```
+{% endnoteblock %}
+
+### 相等性测试与继承
+
+如果隐式和显式的参数不属于同一个类，equals方法该怎么处理？
+
+1. 使用`instanceof`关键字来判断是不是属于同一个类
+2. 使用`getClass()`方法来判断是不是属于同一个类
+
+因为Java语言规范要求equals方法具有下面的性质：
+- 自反性
+- 对称性
+- 传递性
+- 一致性
+- 对于任意非空的引用`x`，`x.equals(null)`应该返回`false`
+
+按照这个性质两种方案各有各自的缺陷：
+
+第一种方案，违背了**对称性**的性质。例如，Super类是Sub的超类，那么
+```java 错误示范
+Super s = new Super();
+Sub sub = new Sub();
+// 下面的案例不会出现问题，因为sub确实 'is-a' Super
+s.equals(sub);
+// 但是下面的就会出现问题
+sub.equals(s);
+```
+因为子类会复写equals方法，而且使用了`instanceof`关键字，所以会出现问题。
+
+第二种方案，违背了**替换原则**。如果判断TreeSet和HashSet判断是不是同一个Set，这样的场景使用`getClass()`方法就会出现问题。
+
+综上所述，
+
+1. 如果**子类能够拥有自己的相等概念**， 则对称性需求将强制采用 getClass 进行检测
+2. 如果**由超类决定相等的概念**，那么就可以使用 imtanceof进行检测， 这样可以在不同
+子类的对象之间进行相等的比较
+
+### 编写`equals()`方法论
+
+1. 显式参数命名为 otherObject, 稍后需要将它转换成另一个叫做 other 的变量。
+2. 检测 this 与 otherObject 是否引用同一个对象
+3. 检测 otherObject是否为 null，如果为 null，返回 false。
+4. 比较 this 与 otherObject 是否属于同一个类。
+5. 将 otherObject 转换为相应的类类型变量
+6. 现在开始对所有需要比较的域进行比较了。
+
+```java 示范代码
+@Override
+public boolean equals(Object otherObject) {
+    if (this == otherObject) return true;
+    if (otherObject == null) return false;
+    // 判断是不是同一个类
+    // 1. if (getClass() != otherObject.getClass()) return false;
+    // 2. if (!(otherObject instanceof ClassName)) return false;
+    ClassName other = (ClassName) otherObject;
+
+    return super.equals(other) 
+        && // 判断需要比较的域
+        && ... ;
+}
+```
+
+对于数组类型的域， 可以使用静态的`Arrays.equals`方法检测相应的数组元素是否相等。
+
+### `hashCode()`方法
+
+**散列码（hash code）**是由对象导出的一个整型值。
+
+```java 字符串计算Hash
+int hash = 0;
+for (int i = 0; i < length0；i++)
+    hash = 31 * hash + charAt(i);
+```
+
+如果重新定义`equals`方法，就必须重新定义`hashCode`方法，以便用户可以将对象插入到散列表。
+
+计算普通对象的Hash，可以使用下面的代码来计算：
+
+```java 计算Hash
+public int hashCode() {
+    return Objects.hash(name, salary, hireDate);
+}
+```
+
+> **Note**：equals 与 hashCode 的定义必须一致∶如果x.equals(y)返回 true，那么x.hashCode()就必须与 y.hashCode()具有相同的值。
+
+{% noteblock 源码分析 %}
+Objects.hash方法，本质上使用了一个可变长参数列表，然后使用Arrays.hashCode方法来实现的。
+{% endnoteblock %}
+
+### `toString` 方法
+
+这个方法很常见，主要用于直接观察对象的内部状态，这里不多赘述。
+
+## 枚举类
+
+```java 
+public enum Size { SMALL , MEDIUM, LARGE, EXTRAJARGE };
+```
+实际上， 这个声明定义的类型是一个类， 它刚好有 4 个实例， 在此尽量不要构造新对象。
+
+如果需要的话， 可以在枚举类型中添加一些构造器、 方法和域。当然，构造器只是在构
+造枚举常量的时候被调用。
+
+```java
+public enum Size {
+    SWALL("S"),MEDIUN("W"),LARCE("1"),EXTRA_LARGE("XL");
+    private String abbreviation;
+    private Size(String abbreviation) { this.abbreviation = abbreviation;}
+    public String getAbbreviation(){ return abbreviation;}
+}
+```
+
+所有的枚举类型都是 Enum 类的子类。
+
+```java
+Size s = Enum.valueOf(Size.class,"SWlL");
+```
+
+每个枚举类型都有一个静态的 values方法，它将返回一个包含全部枚举值的数组。
+
+```java
+Size[] values = Size.values()
+```
+
+ordinal方法返回enum声明中枚举常量的位置，位置从0开始计数。
