@@ -16,7 +16,7 @@ header: false
 
 KlenKiven目前在读大三学生，喜欢折腾Linux，喜欢实现一些属于自己的轮子，希望能在Java/Go后端领域，开源社区贡献自己的一份力量。
 
-{% navbar [博客](/) [专栏](/wiki/) [Gitee](https://gitee.com/klenkiven) %}
+{% navbar [博客](/) [专栏](/wiki/) [友链](/friends/) %}
 
 {% endabout %}
 
