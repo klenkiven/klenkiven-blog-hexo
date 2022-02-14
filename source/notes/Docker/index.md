@@ -159,3 +159,26 @@ sudo docker run -p 6379:6379 --name redis \
 -v ~/docker/redis/conf/redis.conf:/etc/redis/redis.conf \
 -d redis redis-server /etc/redis/redis.conf
 ```
+
+## RabbitMQ容器安装配置
+
+- 4369, 25672：Erlang发现 & 集群端口
+- 5672, 5671：AMQP端口
+- 15672：WEB管理后台端口
+- 61613, 61614：STOMP协议端口
+- 1883, 8883：MQTT协议端口
+
+参考：https://www.rabbitmq.com/networking.html
+
+```bash 安装RabbitMQ
+sudo docker pull rabbitmq:management
+sudo docker run --name rabbitmq -d \
+-p 5671:5671 -p 5672:5672 \
+-p 4369:4369 \
+-p 25672:25672 \
+-p 15671:15671 -p 15672:15672 \
+--restart=always \
+rabbitmq:management
+```
+
+访问：http://localhost:15672/
