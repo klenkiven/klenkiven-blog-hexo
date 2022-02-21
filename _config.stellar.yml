@@ -7,6 +7,11 @@ sidebar:
     notes: '[便笺](/notes/)'
     about: '[关于](/about/)'
 
+# Fancybox 图片放大
+tag_plugins:
+  image:
+    fancybox: true
+
 comments:
   service: beaudar
   beaudar:
