@@ -1,9 +1,10 @@
 ---
-layout: wiki
-wiki: Java核心技术卷
-seo_title: Java继承机制
-order: 101
-comments: false
+title: Java继承机制
+sidebar:
+  - toc
+date: 2022-06-04 14:42:48
+tags: [Java]
+categories: [Java基础知识]
 ---
 
 ## 概述

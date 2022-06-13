@@ -3,7 +3,6 @@ sidebar:
     default_layout: [welcome, recent]
   menu:
     post: '[博客](/)'
-    wiki: '[专栏](/wiki/)'
     notes: '[便笺](/notes/)'
     about: '[关于](/about/)'
 
