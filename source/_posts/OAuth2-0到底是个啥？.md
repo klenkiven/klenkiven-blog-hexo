@@ -5,6 +5,7 @@ sidebar:
 date: 2022-08-18 10:53:55
 tags: [认证权限]
 categories: [认证权限]
+cover: https://klenkiven-blog-image.oss-cn-zhangjiakou.aliyuncs.com/OAuth20-Cover.jpeg
 ---
 
 经过一个月的实习，因为业务相关学习到了很多关于授权鉴权的知识，这里我做一个知识上的总结，扩展一下自己的知识体系。
