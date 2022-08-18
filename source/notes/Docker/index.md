@@ -8,9 +8,9 @@ seo_title: 🐋Docker常用命令
 order: 301
 ---
 
-{% noteblock %}
+{% grid %}
 Docker在使用方面非常方便，一些常用的配置记录下来，防止后面忘了
-{% endnoteblock %}
+{% endgrid %}
 
 ## Nacos注册中心的Docker配置
 

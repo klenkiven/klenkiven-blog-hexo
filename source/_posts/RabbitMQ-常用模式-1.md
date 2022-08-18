@@ -1,5 +1,5 @@
 ---
-title: RabbitMQ-的六种工作模式（1）
+title: RabbitMQ-常用工作模式
 sidebar:
   - toc
 date: 2022-02-18 15:51:41
@@ -173,9 +173,9 @@ boolean durable = true;
 channel.queueDeclare("task_queue", durable, false, false, null);
 ```
 
-{% noteblock 关于消息持久化的注意事项 %}
+{% grid 关于消息持久化的注意事项 %}
 消息的持久化，并不是意味着消息不会丢失。尽管消息被RabbitMQ存储了下来，但是还是有很短的一段时间的消息没有被存储下来可以参考数据库的日志机制。新接收的消息会被缓存起来，隔一段时间才会把数据刷进去，或者消息放入磁盘缓冲区，由操作系统决定何时刷入磁盘。这因为这样并不能保证消息真的被刷进去。需要更强的保证，可以参考[发布者确认机制](https://www.rabbitmq.com/confirms.html)。
-{% endnoteblock %}
+{% endgrid %}
 
 ### 公平调度
 
@@ -274,9 +274,9 @@ public class Worker {
 
 当使用一个队列的时候，队列的名称是很重要的，但是并不是所有时候，例如想要一个临时队列的时候，并不关心它叫什么名字，并且希望在使用队列结束以后能够删除这个队列，这个时候，就需要临时队列。
 
-{% noteblock %}
+{% grid %}
 In the Java client, when we supply no parameters to queueDeclare() we create a **non-durable**, **exclusive**, **autodelete** queue with a **generated name**:
-{% endnoteblock %}
+{% endgrid %}
 
 ```JAVA 临时队列
 String queueName = channel.queueDeclare().getQueue();

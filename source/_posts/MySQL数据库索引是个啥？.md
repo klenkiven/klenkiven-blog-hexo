@@ -60,9 +60,9 @@ B+树和B-树其实数据结构很相似，都具有一下特征：
 * B 树的所有节点既存放键(key) 也存放 数据(data)，而 B+树只有叶子节点存放 key 和 data，其他内节点只存放 key。
 * B 树的叶子节点都是独立的;B+树的叶子节点有一条引用链指向与它相邻的叶子节点。 
 * B 树的检索的过程相当于对范围内的每个节点的关键字做二分查找，可能还没有到达叶子节点，检索就结束了。而 B+树的检索效率就很稳定了，任何查找都是从根节点到叶子节点的过程，叶子节点的顺序检索很明显。
-{% noteblock %} 
+{% grid %} 
 参考 Guide哥，链接: https://javaguide.cn/database/mysql/mysql-index/#hash%E8%A1%A8-b-%E6%A0%91
-{% endnoteblock %}
+{% endgrid %}
 
 这就要求，作为索引的列，必须是有序的。这样可以通过B+树有效组织数据的同时，能够加快检索速度。
 
@@ -135,6 +135,6 @@ B+树和B-树其实数据结构很相似，都具有一下特征：
 * 删除长期未使用的索引，不用的索引的存在会造成不必要的性能损耗 
 * MySQL 5.7 可以通过查询 sys 库的 schema_unused_indexes 视图来查询哪些索引从未被使用 在使用 
 * limit offset 查询缓慢时，可以借助索引来提高性能
-{% noteblock %} 
+{% grid %} 
 参考 Guide哥，链接: https://javaguide.cn/database/mysql/mysql-index/
-{% endnoteblock %}
+{% endgrid %}

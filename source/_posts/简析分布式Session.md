@@ -83,10 +83,10 @@ Spring Session的主要原理是对Http请求和响应进行拦截，将请求�
 
 ### SpringHttpSessionConfiguration：有哪些关键配置？
 
-{% noteblock %}
+{% grid %}
 1. SessionRepository：最终能够实现Session存储的Repository
 2. SessionRepositoryFilter：拦截请求，封装请求体和响应体（**装饰器模式**）
-{% endnoteblock %}
+{% endgrid %}
 
 
 `SpringHttpSessionConfiguration`主要配置了一个`SessionRepositoryFilter`，这个类最重要的参数就是`SessionRepository<S> sessionRepository`，最终要使用Redis来存储Session，需要一个Redis实现的SessionRepository，以及一个Redis实现的Session。

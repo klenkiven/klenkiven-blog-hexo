@@ -25,14 +25,14 @@ public class HelloWorld {
 ```
 
 ## 测试备注标签
-{% noteblock note %}
+{% grid note %}
 fdsafajsuifasjhdf
-{% endnoteblock %}
+{% endgrid %}
 
 ```md note
-{% noteblock note %}
+{% grid note %}
 fdsafajsuifasjhdf
-{% endnoteblock %}
+{% endgrid %}
 ```
 
 ## 测试复制标签
