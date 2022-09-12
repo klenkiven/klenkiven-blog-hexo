@@ -8,6 +8,10 @@ seo_title: ☕Java
 order: 101
 ---
 
+## Java资料整理
+**描述：** ThreadLocal的Entry为什么要继承WeakReference?
+**链接：** https://www.zhihu.com/question/458432418/answer/2486131184
+
 ## JavaGuide
 
 **描述：** 面试指南，学习打卡

@@ -52,7 +52,7 @@ nacos/nacos-server
   mkdir -p ~/docker/nginx/logs
   mkdir -p ~/docker/nginx/conf
   mkdir -p ~/docker/ngnix/conf/nginx
-  chown root ~/docker/ngnix/conf/ngnix
+  chown root ~/docker/ngnix/conf/nginx
   ## 由于所有者不一样，即便是ROOT也没有权限创建文件目录，因此在此之前需要转让权限
   docker container cp nginx:/etc/nginx/*  ~/docker/nginx/conf/ 
   #由于拷贝完成后会在config中存在一个nginx文件夹，所以需要将它的内容移动到conf中
