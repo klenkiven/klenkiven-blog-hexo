@@ -5,6 +5,7 @@ sidebar:
 date: 2022-09-12 22:51:13
 tags: [DDD,架构设计,设计模式]
 categories: [领域驱动设计]
+cover: https://klenkiven-blog-image.oss-cn-zhangjiakou.aliyuncs.com/CA-COVER.jpg
 ---
 
 ## 概述
