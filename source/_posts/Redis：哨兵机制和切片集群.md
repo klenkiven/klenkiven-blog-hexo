@@ -2,14 +2,17 @@
 title: Redis：哨兵机制和切片集群
 sidebar:
   - toc
-date: 2022-09-20 21:02:55
+date: 2022-09-22 21:02:55
 tags: [Redis]
 categories: [Redis]
+cover: "https://klenkiven-blog-image.oss-cn-zhangjiakou.aliyuncs.com/REDIS-SENTINEL-COVER.png"
 ---
 
 前面的文章提到了，Redis 的数据结构和 Redis 的持久化机制，保证了单机情况下 Redis 的可靠性和高性能。但是对于集群的场景下，只有持久化机制，也不能让 Redis 有更高的可靠性。例如，Redis 的主从集群，在主库挂掉以后，整个 Redis 集群便不能处理写操作了，这个时候就需要一个机制来保证主库挂掉也能正常运行 -- **哨兵机制**。对于需要大量存储缓存的时候，主从集群，需要主库的服务器有更高的性能或者存储，显然这样的需求并不可持续，如何让缓存能够分布存储，这就是 -- **切片集群**。
 
 <!--more-->
+
+{% image https://klenkiven-blog-image.oss-cn-zhangjiakou.aliyuncs.com/REDIS-SENTINEL-COVER.png Redis Sentinel %}
 
 ## 哨兵机制：主库挂了该怎么办？
 
@@ -74,4 +77,55 @@ categories: [Redis]
 
 ## 哨兵集群：哨兵挂了该怎么办？
 
+实际上，一旦多个实例组成了**哨兵集群**，即使有哨兵实例出现故障挂掉了，其他哨兵还能继续协作完成主从库切换的工作，包括判定主库是不是处于下线状态，选择新主库，以及通知从库和客户端。在配置哨兵的信息时，我们只需要用到下面的这个配置项，设置**主库的IP和端口**，并没有配置其他哨兵的连接信息。
+
+``` Sentinel 配置解释
+# master-name: 主库名称
+# ip: 主库 IP 地址
+# redis-port: 主库 Redis 端口
+# quorum: 需要多少个哨兵主观认为主库下线，那么就认为其客观下线
+sentinel monitor <master-name> <ip> <redis-port> <quorum>
+```
+这个配置只配置了主库的相关信息，但是没有配置从库的相关信息，那么哨兵之间如何互相发现互相连接的呢？
+
+### 基于 PUB/SUB 机制的哨兵集群组成
+
+哨兵只要和主库建立连接，就可以在主库上发布消息。他们也可以在主库上订阅消息，获取其他哨兵的 IP 和端口信息。其他哨兵在主库上面发布消息以后，他们互相之间就能知晓彼此之间的 IP 和端口。
+
+除了哨兵实例，我们自己编写的应用程序也可以通过Redis进行消息的发布和订阅。所以，为了区分不同应用的消息，Redis会以**频道**的形式，对这些消息进行分门别类的管理。所谓的**频道，实际上就是消息的类别**。当消息类别相同时，它们就属于同一个频道。反之，就属于不同的频道。**只有订阅了同一个频道的应用,才能通过发布的消息进行信息交换**。
+
+{% image https://klenkiven-blog-image.oss-cn-zhangjiakou.aliyuncs.com/REDIS-SENTINEL-05.png 哨兵集群的建立 %}
+
+哨兵除了执行监控任务以外，在主从库发生变更的时候，还需要通知所有的从库，以便于从库和新主库进行数据同步。哨兵通过给主库发送 `INFO` 命令来完成从库信息的获取。其他哨兵也可以通过这样的方法获取到从库的信息，并不断监控。
+
+虽然哨兵机制保证了主从库的监控、选主、切换，但是该怎么通知到客户端主库发生了变更，怎么监控主从切换的过程？这个时候，就可以选择依赖 PUB/SUB 机制，来帮助我们完成哨兵和客户端的信息同步。
+
+### 基于 PUB/SUB 机制的客户端事件通知
+
+从本质上说，哨兵就是一个运行在特定模式下的Redis实例，只不过它并不服务请求操作，只是完成监控、选主和通知的任务。所以，**每个哨兵实例也提供pub/sub机制，客户端可以从哨兵订阅消息**。哨兵提供的消息订阅频道有很多，不同频道包含了主从库切换过程中的不同关键事件。
+
+{% image https://klenkiven-blog-image.oss-cn-zhangjiakou.aliyuncs.com/REDIS-SENTINEL-06.png 客户端订阅事件 %}
+
+了解到这些频道以后就可以让客户端来订阅这些事件了：
+
+```bash
+# 订阅实例“客观下线”的情况
+SUBSCRIBE +odown
+# 订阅“主库地址发生变化的情况”
+SUNSCRIBE +switch-master
+```
+
+### 由那个哨兵执行主从切换？
+
+在投票过程中，任何一个想成为Leader的哨兵，要满足两个条件:第一，**拿到半数以上的赞成票**;第二，**拿到的票数同时还需要大于等于哨兵配置文件中的quorum值**。以3个哨兵为例,假设此时的quorum设置为2，那么，任何一个想成为Leader的哨兵只要拿到2张赞成票，就可以了。
+
+
+
 ## 切片集群：数据太大了该怎么办？
+
+
+
+## 参考资料
+
+- [极客时间] [Redis 核心技术与实战](https://time.geekbang.org/column/intro/100056701)
+- [Redis文档] [High availability with Redis Sentinel](https://redis.io/docs/manual/sentinel/)
