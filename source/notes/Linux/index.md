@@ -8,6 +8,20 @@ seo_title: 🐧Linux常用配置
 order: 302
 ---
 
+## 常用的Gnome插件
+
+`Tray Icons Reloaded`：系统托盘
+
+`Dynamic Panel Transparency`：动态透明
+
+`Arch Linux Updates Indicator`：Archlinux必备
+
+`Espresso`：自动挂起自动熄屏控制（一杯咖啡）
+
+## 手动安装 Gnome 插件
+
+[How to install Gnome Shell Extensions from ZIP file using command line](https://linuxconfig.org/how-to-install-gnome-shell-extensions-from-zip-file-using-command-line-on-ubuntu-18-04-bionic-beaver-linux)
+
 ## Archlinux的安装 && Manjaro的安装
 
 {% post_link ArchLinux-2019-11-01安装流程-安装基本系统 %}
@@ -38,16 +52,6 @@ order: 302
    ```bash
    curl [balabalaba] -x http://127.0.0.1:8889
    ```
-
-## 常用的Gnome插件
-
-`Tray Icons Reloaded`：系统托盘
-
-`Dynamic Panel Transparency`：动态透明
-
-`Arch Linux Updates Indicator`：Archlinux必备
-
-`Espresso`：自动挂起自动熄屏控制（一杯咖啡）
 
 ## 关于Deepin的那些事
 
