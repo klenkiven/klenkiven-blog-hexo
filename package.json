@@ -1,5 +1,5 @@
 {
-  "name": "hexo-site",
+  "name": "klenkiven-blog-hexo",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
     "server": "hexo server"
   },
   "hexo": {
-    "version": "6.0.0"
+    "version": "6.3.0"
   },
   "dependencies": {
     "hexo": "^6.2.0",
